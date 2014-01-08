@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/cron/2200</url>
+    <description>every day 22:00</description>
+    <schedule>every day 22:00</schedule>
+    <timezone>Asia/Tokyo</timezone>
+  </cron>
+  <cron>
+    <url>/cron/2230</url>
+    <description>every day 22:30</description>
+    <schedule>every day 22:30</schedule>
+    <timezone>Asia/Tokyo</timezone>
+  </cron>
+  <cron>
+    <url>/cron/2300</url>
+    <description>every day 23:00</description>
+    <schedule>every day 23:00</schedule>
+    <timezone>Asia/Tokyo</timezone>
+  </cron>
+  <cron>
+    <url>/cron/2330</url>
+    <description>every day 23:30</description>
+    <schedule>every day 23:30</schedule>
+    <timezone>Asia/Tokyo</timezone>
+  </cron>
+</cronentries>
