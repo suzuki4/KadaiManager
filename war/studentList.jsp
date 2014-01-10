@@ -140,15 +140,18 @@
 	  		<input type="submit" value="チェック日付更新">
 	  	</div>
   	</form>  
+  	<div>
+		<form action="add.jsp"  method="post">
+			<input type="hidden" name="managerLogin" value=<%="true" %>>
+			<input type="submit" value="生徒追加">
+		</form>
+	</div>
   	<form action="managerlogin"  method="post">
   	<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
 	<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
 	<input type="hidden" name="update" value=<%=request.getAttribute("update") %>>
 	<div align="center">
 		状態の既チェックを「休止」に設定、未チェックを「休止」から解除：<input type="submit" value="休止状態更新">
-		　<form action="add.jsp"  method="post">
-			<input type="hidden" name="managerLogin" value=<%=true %>>
-			<input type="submit" value="生徒追加">
 	</div>
 	  	<table border="1" align="center">
 	  		<tr>

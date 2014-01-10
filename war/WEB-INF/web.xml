@@ -73,6 +73,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   	<filter-mapping>
     	<filter-name>ManagerLoginFilter</filter-name>
     	<url-pattern>/studentList.jsp</url-pattern>
+    	<url-pattern>/add.jsp</url-pattern>
   	</filter-mapping>
   	<session-config>
   		<session-timeout>90</session-timeout>

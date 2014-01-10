@@ -40,6 +40,8 @@ public class ManagerLoginFilter implements Filter {
 		boolean managerLogin = false;
 		if(request.getAttribute("managerLogin") != null ) {
 			managerLogin = (boolean) request.getAttribute("managerLogin");
+		} else if(request.getParameter("managerLogin") != null && request.getParameter("managerLogin").equals("true")) {
+			managerLogin = true;
 		//æ“¾‚Å‚«‚È‚¢ê‡AƒGƒ‰[
 		} else {
 			RequestDispatcher dispatcher;
