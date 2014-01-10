@@ -10,6 +10,18 @@
 <%
 
 //最初	
+	//managerLogin取得
+	boolean managerLogin = false;
+	if(request.getAttribute("managerLogin") != null ) {
+		managerLogin = (boolean) request.getAttribute("managerLogin");
+	//取得できない場合、エラー
+	} else {
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("manager.jsp");
+   	 	request.setAttribute("fail", "ログイン失敗");
+   	 	dispatcher.forward(request, response);		
+	}
+
 	//データベースから引っ張る日付取得
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
 	String studentListTimeYear;
@@ -145,7 +157,12 @@
   	<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
 	<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
 	<input type="hidden" name="update" value=<%=request.getAttribute("update") %>>
-	<div align="center">状態のチェックを「休止」にし、未チェックを「休止」から解除：<input type="submit" value="休止状態更新"></div>
+	<div align="center">
+		状態の既チェックを「休止」に設定、未チェックを「休止」から解除：<input type="submit" value="休止状態更新">
+		　<form action="add.jsp"  method="post">
+			<input type="hidden" name="managerLogin" value=<%=managerLogin %>>
+			<input type="submit" value="生徒追加">
+	</div>
 	  	<table border="1" align="center">
 	  		<tr>
 	  			<td colspan="2">状態</td>
