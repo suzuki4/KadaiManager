@@ -79,22 +79,25 @@ public class CronServlet extends HttpServlet {
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress("hiroaki.4.suzuki@gmail.com", ""));
             
             //BCC
-            StudentData data;
-            int numberOfReport;
+            boolean BCC = false;
             for(int i = 0; i < studentDataList.size(); i++) {
-            	data = studentDataList.get(i);
+            	StudentData data = studentDataList.get(i);
             	//reportがないなら0、あるならsize()
-            	numberOfReport = 0;
+            	int numberOfReport = 0;
             	if(data.getReportNameList() != null) numberOfReport = data.getReportNameList().size();
             	//reportがあり、cronRunTimeの日付と最新のreportFinishTimeの日付が一致するならメールしない（continue）
             	if(numberOfReport > 0 && sdf.format(data.getReportFinishTimeList().get(numberOfReport - 1)).equals(cronRunTimeString)) continue;
+            	//休止中ならメールしない
+            	if(restIds.contains(data.getId())) continue;
             	msg.addRecipient(Message.RecipientType.BCC, new InternetAddress(studentDataList.get(i).getEmail(), "ID:" + studentDataList.get(i).getId()));
+            	BCC = true;
             }
             
             //タイトルと本文
             ((MimeMessage) msg).setSubject(subject, "Shift_JIS");
             msg.setText(contents);
-            Transport.send(msg);
+            //BCCあるなら送信
+            if(BCC) Transport.send(msg);
  
         } catch (AddressException e) {
             //アドレス不明時
