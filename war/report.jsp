@@ -119,7 +119,7 @@
   </head>
 
   <body>
-  	<table align="center" style="border: solid 1px;" width="320px">
+  	<table align="center" style="border: solid 1px;">
   		<tr>
   			<td colspan="4"  style="border-bottom: solid 1px; margin:10px 0px;">生徒ID：<%=data.getId() %>　/　学年：<%=data.getGrade() %>　/　生徒名：<%=data.getUserName() %></td>
   		</tr>
@@ -134,8 +134,8 @@
   		<tr>
   			<td></td>
   			<td style="height:width: 80px;"><%=reportOpenTimeString %></td>
-  			<td><textarea name="reportName" rows="3" style="width: 180px;" maxlength="100"></textarea></td>
-  			<td><input type="text" name="reportMinutes" size="3" maxlength="3" style="text-align:right;width: 45px; "></td>
+  			<td><textarea name="reportName" rows="3" maxlength="100"></textarea></td>
+  			<td><input type="text" name="reportMinutes" size="3" maxlength="3" style="text-align:right;"></td>
   		</tr>
   		<tr>
   			<td align="center" colspan="4" style="margin:15px 0px;"><input type="submit" value="登録" style="margin=: 10px 0px; padding: 5px 140px;"></td>
