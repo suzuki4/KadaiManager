@@ -25,7 +25,8 @@ public class ManagerLoginServlet extends HttpServlet {
 		try {
 			if(id.equals("iikawa") && pass.equals("kiwi")) {
 				dispatcher = request.getRequestDispatcher("studentList.jsp");
-	        	request.setAttribute("managerLogin", true);
+	        	request.setAttribute("id", id);
+	        	request.setAttribute("pass", pass);
 	           	dispatcher.forward(request, response);
 	        }
         } catch(Exception e) {
