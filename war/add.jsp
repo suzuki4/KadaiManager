@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=Shift_JIS" pageEncoding="Shift_JIS"%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
-        <title>StudentDataの追加</title>
+        <title>生徒データの追加</title>
     </head>
     <body>
         <h1>生徒データの追加</h1>
