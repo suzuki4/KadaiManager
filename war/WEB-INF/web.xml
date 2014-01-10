@@ -21,12 +21,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/managerlogin</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>StudentDataServlet</servlet-name>
-		<servlet-class>database.StudentDataServlet</servlet-class>
+		<servlet-name>StudentDataAddServlet</servlet-name>
+		<servlet-class>database.StudentDataAddServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>StudentDataServlet</servlet-name>
-		<url-pattern>/student</url-pattern>
+		<servlet-name>StudentDataAddServlet</servlet-name>
+		<url-pattern>/studentAdd</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>StatusDataServlet</servlet-name>

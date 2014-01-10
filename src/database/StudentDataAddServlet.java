@@ -10,7 +10,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-public class StudentDataServlet extends HttpServlet {
+public class StudentDataAddServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class StudentDataServlet extends HttpServlet {
     void dispatch(HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         dispatcher = request.getRequestDispatcher("add.jsp");
-    	request.setAttribute("fail", message);
+    	request.setAttribute("info", message);
     	dispatcher.forward(request, response);
     } 
 }
