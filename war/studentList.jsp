@@ -130,17 +130,17 @@
   </head>
 
   <body>
-  	<form action="managerlogin"  method="post">
-		<div align="center">
+	<div align="center">
+  		<form action="managerlogin"  method="post">
 	  		<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
 	  		<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
 	  		<input type="text" name="studentListTimeYear" size="4" maxlength="4" value="<%=studentListTimeYear %>">年
 	  		<input type="text" name="studentListTimeMonth" size="2" maxlength="2" value="<%=studentListTimeMonth %>">月
 	  		<input type="text" name="studentListTimeDay" size="2" maxlength="2" value="<%=studentListTimeDay %>">日
 	  		<input type="submit" value="チェック日付更新">
-	  	</div>
-  	</form>  
-  	<div>
+	  	</form>  
+	</div>
+  	<div align="center">
 		<form action="add.jsp"  method="post">
 			<input type="hidden" name="managerLogin" value=<%="true" %>>
 			<input type="submit" value="生徒追加">
