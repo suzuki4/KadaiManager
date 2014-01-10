@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS" pageEncoding="Shift_JIS"%>
 
+<%
+//managerLogin取得
+	boolean managerLogin = false;
+	if(request.getAttribute("managerLogin") != null ) {
+		managerLogin = (boolean) request.getAttribute("managerLogin");
+	//取得できない場合、エラー
+	} else {
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("manager.jsp");
+ 	 	request.setAttribute("fail", "ログイン失敗");
+ 	 	dispatcher.forward(request, response);		
+	}
+
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">

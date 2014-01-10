@@ -8,20 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS" pageEncoding="Shift_JIS"%>
 
 <%
-
-//最初	
-	//managerLogin取得
-	boolean managerLogin = false;
-	if(request.getAttribute("managerLogin") != null ) {
-		managerLogin = (boolean) request.getAttribute("managerLogin");
-	//取得できない場合、エラー
-	} else {
-		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("manager.jsp");
-   	 	request.setAttribute("fail", "ログイン失敗");
-   	 	dispatcher.forward(request, response);		
-	}
-
+//最初		
 	//データベースから引っ張る日付取得
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
 	String studentListTimeYear;
@@ -160,7 +147,7 @@
 	<div align="center">
 		状態の既チェックを「休止」に設定、未チェックを「休止」から解除：<input type="submit" value="休止状態更新">
 		　<form action="add.jsp"  method="post">
-			<input type="hidden" name="managerLogin" value=<%=managerLogin %>>
+			<input type="hidden" name="managerLogin" value=<%=true %>>
 			<input type="submit" value="生徒追加">
 	</div>
 	  	<table border="1" align="center">
