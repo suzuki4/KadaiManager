@@ -71,7 +71,9 @@
 	String eachData = "";
 	for(int i = 0; i < studentDataList.size(); i++) {
 		StudentData data = studentDataList.get(i);
-		int numberOfReport = data.getReportNameList().size();
+		//レポート数（numberOfReport）取得
+		int numberOfReport = 0;
+		if(data.getReportNameList() != null) numberOfReport = data.getReportNameList().size();
 		eachData 	+=	"<tr>"	
 					+		"<td>"
 					+			"<input type=\"checkbox\" name=\"status\" value=\"" + data.getId() + "\" " + (statusCheck(restIds, data.getId()) ? "checked" : "") + ">"
@@ -89,32 +91,20 @@
 					+			data.getUserName()
 					+		"</td>"
 					;
-		if(numberOfReport >= 1 && sdf.format(data.getReportFinishTimeList().get(numberOfReport - 1)).equals(studentListTimeString)) {
-			eachData+=		"<td>"
-					+			data.getReportNameList().get(numberOfReport - 1)
-					+		"</td>"
-					+		"<td>"
-					+			data.getReportMinutesList().get(numberOfReport - 1)
-					+		"</td>"
-					;
-		}
-		if(numberOfReport >= 2 && sdf.format(data.getReportFinishTimeList().get(numberOfReport - 2)).equals(studentListTimeString)) {
-			eachData+=		"<td>"
-					+			data.getReportNameList().get(numberOfReport - 2)
-					+		"</td>"
-					+		"<td>"
-					+			data.getReportMinutesList().get(numberOfReport - 2)
-					+		"</td>"
-					;
-		}
-		if(numberOfReport >= 3 && sdf.format(data.getReportFinishTimeList().get(numberOfReport - 3)).equals(studentListTimeString)) {	
-			eachData+=		"<td>"
-					+			data.getReportNameList().get(numberOfReport - 3)
-					+		"</td>"
-					+		"<td>"
-					+			data.getReportMinutesList().get(numberOfReport - 3)
-					+		"</td>"
-					;
+		//選択した日付のレポートを後入れ先出しで3つ表示
+		int limit = 3;
+		while(limit > 0 && numberOfReport > 0) {
+			if(sdf.format(data.getReportFinishTimeList().get(numberOfReport - 1)).equals(studentListTimeString)) {
+				eachData+=		"<td>"
+						+			data.getReportNameList().get(numberOfReport - 1)
+						+		"</td>"
+						+		"<td>"
+						+			data.getReportMinutesList().get(numberOfReport - 1)
+						+		"</td>"
+						;
+				limit--;
+			}
+			numberOfReport--;
 		}
 		eachData 	+=	"</tr>"	
 					;
