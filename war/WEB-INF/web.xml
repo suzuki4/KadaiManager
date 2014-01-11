@@ -52,6 +52,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <role-name>admin</role-name>
     </auth-constraint>
 	</security-constraint>
+	<servlet>
+		<servlet-name>ReportForwardServlet</servlet-name>
+		<servlet-class>other.ReportForwardServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReportForwardServlet</servlet-name>
+		<url-pattern>/report/*</url-pattern>
+	</servlet-mapping>
 	<filter>
     	<display-name>EncodingFilter</display-name>
     	<filter-name>EncodingFilter</filter-name>
