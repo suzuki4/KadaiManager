@@ -98,10 +98,13 @@ public class StudentDataModifyServlet extends HttpServlet {
             dispatch(request, response, message);
         //入力が正しい場合
         } else {
-	        data = new StudentData(id, userName, pass, grade, email);
-	        pm = PMF.get().getPersistenceManager();
-	        pm.makePersistent(data);
-	    	//id更新時は古いデータを削除
+        	pm = PMF.get().getPersistenceManager();
+        	data = (StudentData)pm.getObjectById(StudentData.class, id);
+	        data.setPass(pass);
+	        data.setUserName(userName);
+	        data.setGrade(grade);
+	        data.setEmail(email);
+	       	//id更新時は古いデータを削除
 	    	if(request.getParameter("id") != null && !request.getParameter("id").equals(request.getParameter("oldId"))) {
 		    	data = (StudentData)pm.getObjectById(StudentData.class, Long.parseLong(request.getParameter("oldId")));
 		    	pm.deletePersistent(data);

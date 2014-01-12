@@ -13,7 +13,7 @@
 	//idæ“¾
 	int id = -1;
 	if(request.getAttribute("id") != null) {
-		id = (int) request.getAttribute("id");
+		id = Integer.parseInt((String) request.getAttribute("id"));
 	} else if(request.getParameter("id") != null) {
 		id = Integer.parseInt(request.getParameter("id"));
 	}
@@ -142,7 +142,7 @@
   			<td>æ‚è‘g‚ñ‚¾‰Û‘è</td>
   			<td>•ª”</td>
   		</tr>
-  		<form action="report.jsp"  method="post">
+  		<form action="/report.jsp"  method="post">
   		<input type="hidden" name="id" value="<%=id %>">
   		<tr>
   			<td></td>

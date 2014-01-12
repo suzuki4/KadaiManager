@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         		*/
         		manager.close();
         		dispatcher = request.getRequestDispatcher("report.jsp");
-        		request.setAttribute("id", Integer.parseInt(id));
+        		request.setAttribute("id", id);
            	 	dispatcher.forward(request, response);
             }
         } catch(Exception e) {

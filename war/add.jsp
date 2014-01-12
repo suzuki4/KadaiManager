@@ -14,10 +14,18 @@
             <tr><th>ê∂ìkñº:</th><td><input type="text" name="userName" value="<%=request.getAttribute("inputUserName") != null ? request.getAttribute("inputUserName") : "" %>" ></td></tr>
             <tr><th>äwîN:</th><td><input type="text" name="grade" value="<%=request.getAttribute("inputGrade") != null ? request.getAttribute("inputGrade") : "" %>" ></td></tr>
             <tr><th>EÉÅÅ[Éã:</th><td><input type="text" name="email" value="<%=request.getAttribute("inputEmail") != null ? request.getAttribute("inputEmail") : "" %>" ></td></tr>
-            <tr><th></th><td><input type="submit" value="í«â¡"></td></tr>
+            <tr><th></th>
+            	<td nowrap>
+            		<input type="submit" value="í«â¡">
+        </form>
+            		<form method="post" action="/studentList.jsp">
+            			<input type="hidden" name="managerLogin" value="true">
+            			<input type="submit" value="ñﬂÇÈ">
+            		</form>
+            	</td>
+            </tr>
             <tr><th></th><td style="color:#FF0000; font-weight:bold; margin=:15px 0px;"><%if(request.getAttribute("info") != null) out.println(request.getAttribute("info"));%></td>
 		</tr>	
-        </form>
         </table>
     </body>
 </html>

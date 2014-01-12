@@ -10,7 +10,11 @@
 		request.setAttribute("inputGrade", request.getParameter("grade"));
 		request.setAttribute("inputEmail", request.getParameter("email"));
 	}
-	
+/*	//修正されて戻ってきたらidをsetAttribute
+	if(request.getAttribute("inputId") != null) {
+		request.setAttribute("inputId", request.getAttribute("inputId"));
+	}
+	*/
 	//managerLoginがtrueだと、disableも変更可能
 	String disabled = "disabled";
 	if(request.getParameter("managerLogin") != null && request.getParameter("managerLogin").equals("true")) {
@@ -38,12 +42,12 @@
             <tr><th>生徒名:</th><td><input type="text" name="userName" <%=disabled %> value="<%=request.getAttribute("inputUserName") != null ? request.getAttribute("inputUserName") : "" %>" ></td></tr>
             <tr><th>学年:</th><td><input type="text" name="grade" <%=disabled %> value="<%=request.getAttribute("inputGrade") != null ? request.getAttribute("inputGrade") : "" %>" ></td></tr>
             <tr><th>Eメール:</th><td><input type="text" name="email" value="<%=request.getAttribute("inputEmail") != null ? request.getAttribute("inputEmail") : "" %>" ></td></tr>
-            </form>
             <tr><th></th>
-            	<td>
+            	<td nowrap>
             		<input type="submit" value="修正">
+      	</form>
             		<form method="post" action="/report.jsp">
-            			<input type="hidden" name="id" value="<%=request.getAttribute("inputId") %>">
+            			<input type="hidden" name="id" value="<%=(String) request.getAttribute("inputId") %>">
             			<input type="submit" value="戻る">
             		</form>
             	</td>
