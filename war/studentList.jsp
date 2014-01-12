@@ -108,6 +108,17 @@
 					;
 	}	
 
+//生徒削除のselect
+	String selectUserNames = "";
+	for(int i = 0; i < studentDataList.size(); i++) {
+		selectUserNames	+= "<option value=\""
+						+	studentDataList.get(i).getId()
+						+	"\">"
+						+	studentDataList.get(i).getUserName()
+						+	"</option>"
+						;
+	}
+	
 %>
 	
 <%!
@@ -139,12 +150,6 @@
 	  		<input type="submit" value="チェック日付更新">
 	  	</form>  
 	</div>
-  	<div align="center">
-		<form action="add.jsp"  method="post">
-			<input type="hidden" name="managerLogin" value=<%="true" %>>
-			<input type="submit" value="生徒追加">
-		</form>
-	</div>
   	<form action="managerlogin"  method="post">
   	<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
 	<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
@@ -168,5 +173,19 @@
 	  		<%=eachData %>
 	  	</table>
 	</form>
+	<div align="center">
+		<form action="add.jsp"  method="post">
+			<input type="hidden" name="managerLogin" value=<%="true" %>>
+			<input type="submit" value="生徒追加画面へ">
+		</form>
+		<form action="/studentDelete" method="post">
+			<input type="hidden" name="managerLogin" value=<%="true" %>>
+			<select name="selectId" size="1">
+				<option value="初期値">生徒選択</option>
+				<%=selectUserNames %>
+			</select>
+			<input type="submit" value="生徒削除（注意）">
+		</form>
+	</div>
   </body>
 </html>

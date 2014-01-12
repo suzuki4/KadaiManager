@@ -37,6 +37,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/studentModify</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>StudentDataDeleteServlet</servlet-name>
+		<servlet-class>database.StudentDataDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StudentDataDeleteServlet</servlet-name>
+		<url-pattern>/studentDelete</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>StatusDataServlet</servlet-name>
 		<servlet-class>database.StatusDataServlet</servlet-class>
 	</servlet>
@@ -90,6 +98,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     	<filter-name>ManagerLoginFilter</filter-name>
     	<url-pattern>/studentList.jsp</url-pattern>
     	<url-pattern>/add.jsp</url-pattern>
+		<url-pattern>/studentDelete</url-pattern>
   	</filter-mapping>
   	<session-config>
   		<session-timeout>90</session-timeout>
