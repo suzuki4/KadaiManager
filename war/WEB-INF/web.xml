@@ -29,6 +29,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/studentAdd</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>StudentDataModifyServlet</servlet-name>
+		<servlet-class>database.StudentDataModifyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StudentDataModifyServlet</servlet-name>
+		<url-pattern>/studentModify</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>StatusDataServlet</servlet-name>
 		<servlet-class>database.StatusDataServlet</servlet-class>
 	</servlet>
