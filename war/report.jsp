@@ -126,7 +126,11 @@
   		<tr>
   			<td colspan="4"  style="border-bottom: solid 1px; margin:10px 0px;">
   				<form action="/modify.jsp" method="post">
-  					<input type="hidden" name="data" value="<%=data %>">
+  					<input type="hidden" name="id" value="<%=id %>">
+  					<input type="hidden" name="pass" value="<%=data.getPass() %>">
+  					<input type="hidden" name="userName" value="<%=data.getUserName() %>">
+  					<input type="hidden" name="grade" value="<%=data.getGrade() %>">
+  					<input type="hidden" name="email" value="<%=data.getEmail() %>">
   					<input type="hidden" name="managerLogin" value="<%=request.getAttribute("managerLogin") %>">
   					<input type="submit" value="“o˜^î•ñC³">
   				</form>
