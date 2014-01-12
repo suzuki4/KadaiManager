@@ -31,20 +31,21 @@ public class ReportForwardServlet extends HttpServlet {
 		//無理やりIDとパス取得
 		String idString = request.getPathInfo();
 		int index = idString.indexOf('-');
-		String pass = idString.substring(index + 1, idString.length());
+		int passHash = Integer.parseInt(idString.substring(index + 1, idString.length()));
 		idString = idString.substring(1,index);
 		response.getWriter().println(idString);
-		response.getWriter().println(pass);
+		response.getWriter().println(passHash);
 		//data取得
 		PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         StudentData data = (StudentData)manager.getObjectById(StudentData.class,Long.parseLong(idString));        	
     	//パスチェック
-    	if(data.getPass().equals(pass)) {
+    	if(data.getPass().hashCode() == passHash) {
 			//report.jspに飛ばす
     		manager.close();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/report.jsp");
 	   	 	request.setAttribute("id", Integer.parseInt(idString));
+	   	 	request.setAttribute("managerLogin", "true");
 	   	 	dispatcher.forward(request, response);
     	}
     	manager.close();

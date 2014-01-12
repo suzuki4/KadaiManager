@@ -86,7 +86,7 @@
 					+			data.getGrade()
 					+		"</td>"
 					+		"<td>"
-					+			"<a href=\"/report/" + data.getId() + "-" + data.getPass() + "\">" + data.getUserName() + "</a>"
+					+			"<a href=\"/report/" + data.getId() + "-" + data.getPass().hashCode() + "\">" + data.getUserName() + "</a>"
 					+		"</td>"
 					;
 		//選択した日付のレポートを後入れ先出しで3つ表示

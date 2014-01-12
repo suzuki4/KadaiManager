@@ -2,8 +2,9 @@
 
 <%
 	//
-	if(request.getParameter("") == ""){}
-
+	if(request.getParameter("managerLogin").equals("true")) {
+		out.println("true");
+	}
 %>
 
 <html>

@@ -121,7 +121,16 @@
   <body>
   	<table align="center" style="border: solid 1px;">
   		<tr>
-  			<td colspan="4"  style="border-bottom: solid 1px; margin:10px 0px;">生徒ID：<%=data.getId() %>　/　学年：<%=data.getGrade() %>　/　生徒名：<%=data.getUserName() %></td>
+  			<td colspan="4" >生徒ID：<%=data.getId() %>　/　学年：<%=data.getGrade() %>　/　生徒名：<%=data.getUserName() %></td>
+  		</tr>
+  		<tr>
+  			<td colspan="4"  style="border-bottom: solid 1px; margin:10px 0px;">
+  				<form action="/modify.jsp" method="post">
+  					<input type="hidden" name="data" value="<%=data %>">
+  					<input type="hidden" name="managerLogin" value="<%=request.getAttribute("managerLogin") %>">
+  					<input type="submit" value="登録情報修正">
+  				</form>
+  			</td>
   		</tr>
   		<tr>
   			<td><input type="submit" value="実績&#13;&#10;一覧"></td>
@@ -138,7 +147,7 @@
   			<td><input type="text" name="reportMinutes" size="3" maxlength="3" style="text-align:right;"></td>
   		</tr>
   		<tr>
-  			<td align="center" colspan="4" style="margin:15px 0px;"><input type="submit" value="登録" style="margin=: 10px 0px; padding: 5px 140px;"></td>
+  			<td align="center" colspan="4" style="margin:15px 0px;"><input type="submit" value="送信！" style="margin=: 10px 0px; padding: 5px 140px;"></td>
   		</tr>
   		</form>
   		<%=error %>
