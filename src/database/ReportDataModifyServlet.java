@@ -116,17 +116,18 @@ public class ReportDataModifyServlet extends HttpServlet {
 	    			message += "分数を数値で入力すること！";    				
 				}
 			}			
-			//入力ミスがある場合
-		    if(!message.equals("")) {
-		    	request.setAttribute("reportFinishTimeYear", request.getAttribute("reportFinishTimeYear"));
-		    	request.setAttribute("reportFinishTimeMonth", request.getAttribute("reportFinishTimeMonth"));
-		    	request.setAttribute("reportFinishTimeDay", request.getAttribute("reportFinishTimeDay"));
-		    	request.setAttribute("reportFinishTimeHour", request.getAttribute("reportFinishTimeHour"));
-		    	request.setAttribute("reportFinishTimeMinute", request.getAttribute("reportFinishTimeMinute"));
-		    	request.setAttribute("reportName", request.getAttribute("reportName"));
-		    	request.setAttribute("reportMinutes", request.getAttribute("reportMinutes"));
-		    	dispatch(request, response, message);
-		    }
+		//入力ミスがある場合
+	    if(!message.equals("")) {
+	    	request.setAttribute("reportFinishTimeYear", request.getAttribute("reportFinishTimeYear"));
+	    	request.setAttribute("reportFinishTimeMonth", request.getAttribute("reportFinishTimeMonth"));
+	    	request.setAttribute("reportFinishTimeDay", request.getAttribute("reportFinishTimeDay"));
+	    	request.setAttribute("reportFinishTimeHour", request.getAttribute("reportFinishTimeHour"));
+	    	request.setAttribute("reportFinishTimeMinute", request.getAttribute("reportFinishTimeMinute"));
+	    	request.setAttribute("reportName", request.getAttribute("reportName"));
+	    	request.setAttribute("reportMinutes", request.getAttribute("reportMinutes"));
+	    	dispatch(request, response, message);
+	    //入力ミスがない場合
+	    } else {
     	//data取得
     	PersistenceManager pm = PMF.get().getPersistenceManager();
     	StudentData data = (StudentData)pm.getObjectById(StudentData.class, id);
@@ -149,6 +150,7 @@ public class ReportDataModifyServlet extends HttpServlet {
 	    pm.close();
     	//成功の旨を返す
 	    dispatch(request, response, "課題データ修正成功！");
+	    }
     }
     
     
