@@ -38,6 +38,7 @@
 			for(int i = 0; i < selectData.getReportNameList().size(); i++) {
 				//map‚Ìvalue‚ÉŽû”[—p‚ÌArrayListì¬
 				ArrayList mapValue = new ArrayList();
+				mapValue.add(i);
 				mapValue.add(selectData.getReportNameList().get(i));
 				mapValue.add(selectData.getReportMinutesList().get(i));
 				//map‚ÉŽû”[
@@ -53,6 +54,7 @@
 									+			"<form action=\"/reportModify.jsp\" method=\"post\" style=\"display: inline;\">"
 									+				"<input type=\"hidden\" name=\"managerLogin\" value=\"true\">"
 									+				"<input type=\"hidden\" name=\"id\" value=" + id + ">"
+									+				"<input type=\"hidden\" name=\"reportNumber\" value=" + selectDataMap.get(keyDate).get(0) + ">"
 									+				"<input type=\"submit\" value=\"C³\">"
 									+			"</form>"
 									+		"</td>"
@@ -60,10 +62,10 @@
 									+			dateStringFormat.format(keyDate)
 									+		"</td>"
 									+		"<td>"
-									+			selectDataMap.get(keyDate).get(0)
+									+			selectDataMap.get(keyDate).get(1)
 									+		"</td>"
 									+		"<td>"
-									+			selectDataMap.get(keyDate).get(1)
+									+			selectDataMap.get(keyDate).get(2)
 									+		"</td>"
 									+	"</tr>"
 									;
