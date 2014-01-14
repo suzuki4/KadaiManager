@@ -174,7 +174,11 @@
 	  	</table>
 	</form>
 	<div align="center">
-		<form action="add.jsp"  method="post">
+		<form action="/reportList.jsp"  method="post">
+			<input type="hidden" name="managerLogin" value=<%="true" %>>
+			<input type="submit" value="‰Û‘èC³‰æ–Ê‚Ö">
+		</form>
+		<form action="/add.jsp"  method="post">
 			<input type="hidden" name="managerLogin" value=<%="true" %>>
 			<input type="submit" value="¶“k’Ç‰Á‰æ–Ê‚Ö">
 		</form>

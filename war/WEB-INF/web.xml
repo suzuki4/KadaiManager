@@ -99,6 +99,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     	<url-pattern>/studentList.jsp</url-pattern>
     	<url-pattern>/add.jsp</url-pattern>
 		<url-pattern>/studentDelete</url-pattern>
+		<url-pattern>/reportList.jsp</url-pattern>
+		<url-pattern>/reportModify.jsp</url-pattern>
   	</filter-mapping>
   	<session-config>
   		<session-timeout>90</session-timeout>
