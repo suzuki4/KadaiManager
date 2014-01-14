@@ -45,6 +45,22 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/studentDelete</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>ReportDataModifyServlet</servlet-name>
+		<servlet-class>database.ReportDataModifyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReportDataModifyServlet</servlet-name>
+		<url-pattern>/reportModify</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ReportDataDeleteServlet</servlet-name>
+		<servlet-class>database.ReportDataDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReportDataDeleteServlet</servlet-name>
+		<url-pattern>/reportDelete</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>StatusDataServlet</servlet-name>
 		<servlet-class>database.StatusDataServlet</servlet-class>
 	</servlet>
@@ -101,6 +117,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/studentDelete</url-pattern>
 		<url-pattern>/reportList.jsp</url-pattern>
 		<url-pattern>/reportModify.jsp</url-pattern>
+		<url-pattern>/reportModify</url-pattern>
+		<url-pattern>/reportDelete</url-pattern>
   	</filter-mapping>
   	<session-config>
   		<session-timeout>90</session-timeout>

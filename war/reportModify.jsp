@@ -5,8 +5,13 @@
 <%@ page import="java.util.*"%>
 
 <%
-	//最初飛んできた情報から初期情報を取得
-	Long id = Long.parseLong(request.getParameter("id"));
+	//id取得
+	Long id = -1L;
+	if(request.getParameter("id") != null) {
+		id = Long.parseLong(request.getParameter("id"));
+	} else if(request.getAttribute("id") != null) {
+		id = (Long) request.getAttribute("id");
+	}
 	//data取得
 	PersistenceManager pm = PMF.get().getPersistenceManager();
 	Query query = pm.newQuery(StudentData.class);
@@ -36,8 +41,17 @@
 	//課題名取得
 	String reportName = data.getReportNameList().get(reportNumber);
 	//分数取得
-	int reportMinutes = data.getReportMinutesList().get(reportNumber);
-	
+	String reportMinutes = String.valueOf(data.getReportMinutesList().get(reportNumber));
+	//入力ミスで戻ってきた場合
+	if(request.getAttribute("reportName") != null) {
+		reportFinishTimeYear = (String) request.getAttribute("reportFinishTimeYear");
+		reportFinishTimeMonth = (String) request.getAttribute("reportFinishTimeMonth");
+		reportFinishTimeDay = (String) request.getAttribute("reportFinishTimeDay");
+		reportFinishTimeHour = (String) request.getAttribute("reportFinishTimeHour");
+		reportFinishTimeMinute = (String) request.getAttribute("reportFinishTimeMinute");
+		reportName = (String) request.getAttribute("reportName");
+		reportMinutes = (String) request.getAttribute("reportMinutes");
+	}
 %>
 
 <html>
@@ -49,8 +63,9 @@
         <h1>課題データの修正</h1>
         <table>
         <form method="post" action="/reportModify" style="display: inline;">
-            <input type="hidden" name="managerLogin" value="<%=request.getAttribute("managerLogin") != null ? request.getAttribute("managerLogin") : "" %>">
+            <input type="hidden" name="managerLogin" value="true">
         	<input type="hidden" name="id" value="<%=id %>">
+        	<input type="hidden" name="reportNumber" value="<%=reportNumber %>">
             <tr><th>生徒ID:</th><td><input type="text" name="id" disabled value="<%=id %>" ></td></tr>
             <tr><th>生徒名:</th><td><input type="text" name="userName" disabled value="<%=userName %>" ></td></tr>
             <tr><th>課題日時:</th>
@@ -81,6 +96,13 @@
             		</form>
             	</td>
             </tr>
+            <tr style="color:#FF0000; font-weight:bold; margin=:15px 0px;">
+            	<th>
+            	</th>
+            	<td>
+	  				<%=request.getAttribute("info") != null ? request.getAttribute("info"): "" %>
+				</td>
+			</tr>
         </table>
     </body>
 </html>

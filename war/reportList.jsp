@@ -17,11 +17,14 @@
 	pm.close();
 
 //selectDataString取得（selectされた生徒がいる場合）
+	//id取得
 	Long id = -1L;
-	String selectDataString = "";
 	if(request.getParameter("selectId") != null) {
-		//selectData取得
 		id = Long.parseLong(request.getParameter("selectId"));
+	}
+	String selectDataString = "";
+	if(id != -1L) {
+		//selectData取得
 		pm = PMF.get().getPersistenceManager();
 		query = pm.newQuery(StudentData.class);
 		query.setFilter("id == " + id);
@@ -32,7 +35,7 @@
 			//selectDataMap取得（selectDataをsortのためmapに収納）
 			TreeMap<Date, ArrayList> selectDataMap = new TreeMap<Date, ArrayList>();
 			//mapのkeyとなるArryaList<Date>作成してソート
-			ArrayList<Date> mapKey = selectData.getReportFinishTimeList();
+			ArrayList<Date> mapKey = new ArrayList(selectData.getReportFinishTimeList());
 			Collections.sort(mapKey);
 			//mapに収納
 			for(int i = 0; i < selectData.getReportNameList().size(); i++) {
