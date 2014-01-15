@@ -21,6 +21,8 @@
 	Long id = -1L;
 	if(request.getParameter("selectId") != null) {
 		id = Long.parseLong(request.getParameter("selectId"));
+	} else if(request.getAttribute("id") != null) {
+		id = (Long) request.getAttribute("id");
 	}
 	String selectDataString = "";
 	if(id != -1L) {
@@ -91,7 +93,17 @@
 	}
 
 
-
+//ïÒçêí«â¡É{É^Éì
+	String reportAddButton = "";
+	if(id != -1L) {
+		reportAddButton	+=	"<form action=\"/reportAdd.jsp\" method=\"post\" style=\"display: inline;\">"
+						+		"<input type=\"hidden\" name=\"managerLogin\" value=\"true\">"
+						+		"<input type=\"hidden\" name=\"id\" value=" + id + ">"
+						+		"<input type=\"submit\" value=\"ïÒçêí«â¡\">"
+						+	"</form>"
+						;
+	}
+	
 %>
 
 <html>
@@ -120,5 +132,15 @@
   		</tr>
   		<%=selectDataString %>
   	</table>
+  	<p><div align="center">
+	  	<%=reportAddButton %>
+		<form action="/studentList.jsp" method="post" style="display: inline;">
+				<input type="hidden" name="managerLogin" value=<%="true" %>>
+				<input type="submit" value="ñﬂÇÈ">
+		</form>
+	</div></p>
+	<div align="center" style="color:#FF0000; font-weight:bold; margin=:15px 0px;">
+		${info}
+	</div>
   </body>
 </html>
