@@ -64,6 +64,14 @@
 									+			"</form>"
 									+		"</td>"
 									+		"<td>"
+									+			"<form action=\"/reportDelete\" method=\"post\" style=\"display: inline;\">"
+									+				"<input type=\"hidden\" name=\"managerLogin\" value=\"true\">"
+									+				"<input type=\"hidden\" name=\"id\" value=" + id + ">"
+									+				"<input type=\"hidden\" name=\"reportNumber\" value=" + selectDataMap.get(keyDate).get(0) + ">"
+									+				"<input type=\"submit\" value=\"íœi’ˆÓj\">"
+									+			"</form>"
+									+		"</td>"
+									+		"<td>"
 									+			dateStringFormat.format(keyDate)
 									+		"</td>"
 									+		"<td>"
@@ -125,6 +133,7 @@
 	</div>
   	<table border="1" align="center">
   		<tr>
+  			<td></td>
   			<td></td>
   			<td>“ú•t</td>
   			<td>‰Û‘è–¼</td>

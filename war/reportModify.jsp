@@ -83,12 +83,6 @@
             	<td nowrap>
             		<input type="submit" value="C³">
       	</form>
-            		<form method="post" action="/reportDelete" style="display: inline;">
-                        <input type="hidden" name="managerLogin" value="true">
-            			<input type="hidden" name="id" value="<%=id %>">
-            			<input type="hidden" name="reportNumber" value="<%=reportNumber %>">
-            			<input type="submit" value="íœi’ˆÓIj">
-            		</form>
             		<form method="post" action="/reportList.jsp" style="display: inline;">
                         <input type="hidden" name="managerLogin" value="true">
             			<input type="hidden" name="selectId" value="<%=id %>">
