@@ -31,12 +31,53 @@
 		period = request.getParameter("period");
 	}
 	//resultDateFormat設定
-	SimpleDateFormat resultDateFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日('E') 'HH':'mm", Locale.JAPAN);
+	SimpleDateFormat resultDateFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日('E')'", Locale.JAPAN);
 	//日付計算用フォーマット
 	SimpleDateFormat resultDateCompareFormat = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat resultMonthCompareFormat = new SimpleDateFormat("yyyyMM");
-	//resultDate取得
-	Date resultDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 9);
+	//日付のみのcalendar、計算start日、計算end日を取得
+	Calendar calendar = Calendar.getInstance(Locale. JAPAN);
+	calendar.set(Calendar.HOUR_OF_DAY, 0);
+	calendar.set(Calendar.MINUTE, 0);
+	calendar.set(Calendar.SECOND, 0);
+	calendar.set(Calendar.MILLISECOND, 0);
+	Date startDate;
+	String startDateString = "";
+	Date endDate;
+	String endDateString = "";
+	switch(period) {
+	case "lastDay":
+		//endDate
+		endDate = calendar.getTime();
+		//startDate
+		calendar.add(Calendar.DATE, -1);
+		startDate = calendar.getTime();
+		startDateString = resultDateFormat.format(startDate);
+		break;
+	case "lastWeek":
+		//endDate
+		calendar.add(Calendar.DATE, - Calendar.DAY_OF_WEEK);
+		endDateString = resultDateFormat.format(calendar.getTime());
+		calendar.add(Calendar.DATE, 1);
+		endDate = calendar.getTime();
+		//startDate
+		calendar.add(Calendar.DATE, - 7);
+		startDate = calendar.getTime();
+		startDateString = resultDateFormat.format(startDate);
+		break;
+	case "lastMonth":
+		calendar.set(Calendar.DATE, 1);
+		//endDate
+		endDate = calendar.getTime();
+		calendar.add(Calendar.DATE, -1);
+		endDateString = resultDateFormat.format(calendar.getTime());
+		//startDate
+		calendar.set(Calendar.DATE, 1);
+		startDate = calendar.getTime();
+		startDateString = resultDateFormat.format(startDate);
+		break;
+	}
+//Date resultDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 9);
 	//resultDateを比較用Stringに
 	String resultDateCompareString = resultDateCompareFormat.format(resultDate.getTime() - 1000 * 60 * 60 * 24);
 	//eachDataString
