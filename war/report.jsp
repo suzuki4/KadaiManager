@@ -125,7 +125,7 @@
   		</tr>
   		<tr>
   			<td colspan="4"  style="border-bottom: solid 1px; margin:10px 0px;">
-  				<form action="/modify.jsp" method="post">
+  				<form action="/modify.jsp" method="post" style="display: inline;">
   					<input type="hidden" name="id" value="<%=id %>">
   					<input type="hidden" name="pass" value="<%=data.getPass() %>">
   					<input type="hidden" name="userName" value="<%=data.getUserName() %>">
@@ -134,10 +134,14 @@
   					<input type="hidden" name="managerLogin" value="<%=request.getAttribute("managerLogin") %>">
   					<input type="submit" value="“o˜^î•ñC³">
   				</form>
+  				<form action="/result.jsp" method="post" style="display: inline;">
+  					<input type="hidden" name="id" value="<%=id %>">
+  					<input type="submit" value="ŽÀÑˆê——">
+  				</form>
   			</td>
   		</tr>
   		<tr>
-  			<td><input type="submit" value="ŽÀÑ&#13;&#10;ˆê——"></td>
+  			<td></td>
   			<td>“úŽž</td>
   			<td>Žæ‚è‘g‚ñ‚¾‰Û‘è</td>
   			<td>•ª”</td>
