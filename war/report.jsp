@@ -11,11 +11,11 @@
 
 //最初
 	//id取得
-	int id = -1;
+	Long id = -1L;
 	if(request.getAttribute("id") != null) {
-		id = Integer.parseInt((String) request.getAttribute("id"));
+		id = (Long) request.getAttribute("id");
 	} else if(request.getParameter("id") != null) {
-		id = Integer.parseInt(request.getParameter("id"));
+		id = Long.parseLong(request.getParameter("id"));
 	}
 	//data取得
 	PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -81,33 +81,36 @@
 					;	
 		}
 	}
+
 //以下本日登録したデータがある場合
 	String reportFinishTimeToday = "";
 	String reportOpenTimeDate = new SimpleDateFormat("yyMMdd").format(reportOpenTime);	
-	for(int i = 0; i < data.getReportFinishTimeList().size(); i++) {
-		Date takeReportFinishTime = data.getReportFinishTimeList().get(i);		
-		String takeReportFinishTimeDate = new SimpleDateFormat("yyMMdd").format(takeReportFinishTime);
-		if(reportOpenTimeDate.equals(takeReportFinishTimeDate)) {
-			reportFinishTimeToday +=	"<tr>"
-											//取消ボタン
-									+		"<td align=\"center\">"
-									+			"<form action=\"report.jsp\" method=\"post\">"
-									+				"<input type=\"hidden\" name=\"id\" value=" + id + ">"
-									+				"<input type=\"hidden\" name=\"index\" value=" + i + ">"
-									+				"<input type=\"submit\" value=\"取消\">"
-									+			"</form>"
-									+		"</td>"
-									+		"<td>"
-									+			new SimpleDateFormat("yy'/'MM'/'dd'\n'HH':'mm").format(takeReportFinishTime)
-									+		"</td>"
-									+		"<td>"
-									+			data.getReportNameList().get(i)
-									+		"</td>"
-									+		"<td>"
-									+			data.getReportMinutesList().get(i)
-									+		"</td>"
-									+	"</tr>"
-									;
+	if(data.getReportFinishTimeList() != null) {
+		for(int i = 0; i < data.getReportFinishTimeList().size(); i++) {
+			Date takeReportFinishTime = data.getReportFinishTimeList().get(i);		
+			String takeReportFinishTimeDate = new SimpleDateFormat("yyMMdd").format(takeReportFinishTime);
+			if(reportOpenTimeDate.equals(takeReportFinishTimeDate)) {
+				reportFinishTimeToday +=	"<tr>"
+												//取消ボタン
+										+		"<td align=\"center\">"
+										+			"<form action=\"report.jsp\" method=\"post\" style=\"display: inline;\">"
+										+				"<input type=\"hidden\" name=\"id\" value=" + id + ">"
+										+				"<input type=\"hidden\" name=\"index\" value=" + i + ">"
+										+				"<input type=\"submit\" value=\"取消\">"
+										+			"</form>"
+										+		"</td>"
+										+		"<td>"
+										+			new SimpleDateFormat("yy'/'MM'/'dd'\n'HH':'mm").format(takeReportFinishTime)
+										+		"</td>"
+										+		"<td>"
+										+			data.getReportNameList().get(i)
+										+		"</td>"
+										+		"<td>"
+										+			data.getReportMinutesList().get(i)
+										+		"</td>"
+										+	"</tr>"
+										;
+			}
 		}
 	}
 %>
