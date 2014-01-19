@@ -3,6 +3,7 @@
 <%@ page import="java.io.*"%>
 <%@ page import="database.*"%>
 <%@ page import="javax.jdo.*"%>
+<%@ page import="other.*"%>
 
 <%@ page language="java" contentType="text/html; charset=Shift_JIS" pageEncoding="Shift_JIS"%>
 
@@ -26,135 +27,84 @@
 	StudentData data = ((List<StudentData>)pm.detachCopyAll((List<StudentData>)query.execute())).get(0);
 	pm.close();
 	//periodが有る場合（デフォルトは無し→lastDay前日実績）
-	String period = "lastDay";
+	String period = Period.LASTDAY;
 	if(request.getParameter("period") != null) {
 		period = request.getParameter("period");
 	}
-	//resultDateFormat設定
-	SimpleDateFormat resultDateFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日('E')'", Locale.JAPAN);
-	//日付計算用フォーマット
-	SimpleDateFormat resultDateCompareFormat = new SimpleDateFormat("yyyyMMdd");
-	SimpleDateFormat resultMonthCompareFormat = new SimpleDateFormat("yyyyMM");
-	//日付のみのcalendar、計算start日、計算end日を取得
-	Calendar calendar = Calendar.getInstance(Locale. JAPAN);
-	calendar.set(Calendar.HOUR_OF_DAY, 0);
-	calendar.set(Calendar.MINUTE, 0);
-	calendar.set(Calendar.SECOND, 0);
-	calendar.set(Calendar.MILLISECOND, 0);
-	Date startDate;
-	String startDateString = "";
-	Date endDate;
-	String endDateString = "";
-	switch(period) {
-	case "lastDay":
-		//endDate
-		endDate = calendar.getTime();
-		//startDate
-		calendar.add(Calendar.DATE, -1);
-		startDate = calendar.getTime();
-		startDateString = resultDateFormat.format(startDate);
-		break;
-	case "lastWeek":
-		//endDate
-		calendar.add(Calendar.DATE, - Calendar.DAY_OF_WEEK);
-		endDateString = resultDateFormat.format(calendar.getTime());
-		calendar.add(Calendar.DATE, 1);
-		endDate = calendar.getTime();
-		//startDate
-		calendar.add(Calendar.DATE, - 7);
-		startDate = calendar.getTime();
-		startDateString = resultDateFormat.format(startDate);
-		break;
-	case "lastMonth":
-		calendar.set(Calendar.DATE, 1);
-		//endDate
-		endDate = calendar.getTime();
-		calendar.add(Calendar.DATE, -1);
-		endDateString = resultDateFormat.format(calendar.getTime());
-		//startDate
-		calendar.set(Calendar.DATE, 1);
-		startDate = calendar.getTime();
-		startDateString = resultDateFormat.format(startDate);
-		break;
-	}
-//Date resultDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 9);
-	//resultDateを比較用Stringに
-	String resultDateCompareString = resultDateCompareFormat.format(resultDate.getTime() - 1000 * 60 * 60 * 24);
-	//eachDataString
-	String eachDataString = "";
-	for(int i = 0; i < studentDataList.size(); i++) {
-		StudentData eachData = studentDataList.get(i);
-		//合計分数計算
-		int total = 0;
-		int average = 0;
-			//レポート数（numberOfReport）取得
-			int numberOfReport = 0;
-			if(eachData.getReportNameList() != null) numberOfReport = eachData.getReportNameList().size();		
-			//
-			//計算期間によって分類
-			Calendar calendar;
-			int j;
-			switch(period) {
-			case "lastDay":
-				for(j = 0; j < numberOfReport; j++) {
-					//該当する場合
-					if(resultDateCompareFormat.format(eachData.getReportFinishTimeList().get(j)).equals(resultDateCompareString)) {
-						total += eachData.getReportMinutesList().get(j);
-					}
-				}
-				average = total;
-				break;
-			case "lastWeek":
-				//計算週をはじく
-				calendar = Calendar.getInstance(Locale.JAPAN);
-				int adjust = 1 - Calendar.DAY_OF_WEEK - 7;
-				calendar.set(Calendar.YEAR, Calendar.MONTH, Calendar.DATE + adjust);
-				Date startDate = calendar.getTime();
-				Date endDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * 7);
-				for(j = 0; j < numberOfReport; j++) {
-					//該当する場合
-					if(eachData.getReportFinishTimeList().get(j).after(new Date(startDate.getTime() - 1)) && eachData.getReportFinishTimeList().get(j).before(endDate)) {
-						total += eachData.getReportMinutesList().get(j);
-					}
-				}
-				average = total / 7;
-				break;
-			case "lastMonth":
-				//計算月をはじく
-				calendar = Calendar.getInstance(Locale.JAPAN);
-				calendar.add(Calendar.MONTH, -1);
-				calendar.set(Calendar.YEAR, Calendar.MONTH, Calendar.DATE);
-				String resultMonthCompareString = resultMonthCompareFormat.format(calendar.getTime());
-				for(j = 0; j < numberOfReport; j++) {
-					//該当する場合
-					if(resultMonthCompareFormat.format(eachData.getReportFinishTimeList().get(j)).equals(resultMonthCompareString)) {
-						total += eachData.getReportMinutesList().get(j);
-					}
-				}
-				average = total / calendar.getActualMaximum(Calendar.DATE);
-				break;
-			}		
-		//各生徒ごとに表示
-		eachDataString 	+=	"<tr>"
-						+		"<td>"
-						+			eachData.getGrade()
-						+		"</td>"
-						+		"<td>"
-						+			eachData.getUserName()
-						+		"</td>"
-						+		"<td>"
-						+			"グラフ"
-						+		"</td>"
-						+		"<td>"
-						+			total
-						+		"</td>"
-						+		"<td>"
-						+			average
-						+		"</td>"
-						+	"</tr>"
-						;
-	}
+	//resultPeriodFormat設定
+	SimpleDateFormat resultPeriodFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日('E')'", Locale.JAPAN);
+	//resultPeriod（startDate, endDate, dateString）を取得
+	ResultPeriod resultPeriod = new ResultPeriod(period, resultPeriodFormat);
+	//resultDataString取得
+	String resultDataString = resultDataString(studentDataList, resultPeriod);
+	
 %>	
+
+<%!
+	String resultDataString(List<StudentData> studentDataList, ResultPeriod resultPeriod) {
+		////各生徒ごとの学年、名前、合計分数、平均分数を格納するRankingDataをvalueとするTreeMap作成
+		TreeMap<Long, RankingData> rankingMap = new TreeMap<Long, RankingData>();
+		//グラフ用にtotalの最大値を求めるtotalListの作成
+		ArrayList<Integer> totalList = new ArrayList<Integer>();
+		//全生徒データをチェック
+		StudentData eachData;
+		for(int i = 0; i < studentDataList.size(); i++) {
+			eachData = studentDataList.get(i);
+			int total = 0;
+			//レポートが有る場合
+			if(eachData.getReportNameList() != null) {
+				//全レポートをチェック
+				for(int j = 0; j < eachData.getReportNameList().size(); j++) {
+					//該当有り
+					if(resultPeriod.getStartDate().before(eachData.getReportFinishTimeList().get(j)) && eachData.getReportFinishTimeList().get(j).before(resultPeriod.getEndDate())) {
+						total += eachData.getReportMinutesList().get(j);
+					}
+				}
+			}
+			totalList.add(total);
+			//RankingDataを作成して格納
+			RankingData rankingData = new RankingData(eachData.getGrade(), eachData.getUserName(), total, total / (total != 0 ? resultPeriod.getNumberOfDate() : -1));
+			//ランキング表示用TreeMapのkey取得
+			Long key = (long) total * 100000 * 100000 + eachData.getId();
+			//put
+			rankingMap.put(key, rankingData);
+		}
+		
+		//合計分数の最大値を100としたグラフ係数を取得
+		double graphParameter;
+		try{
+			graphParameter = 100.0 / Collections.max(totalList);
+		} catch(NullPointerException | ArithmeticException e) {
+			graphParameter = 0.0;
+		}
+		
+		//各生徒ごとに表示内容を格納
+		String resultDataString = "";
+		while(!rankingMap.isEmpty()) {
+			Long key = rankingMap.lastKey();
+			RankingData rankingData = rankingMap.remove(key);
+			resultDataString 	+=	"<tr>"
+								+		"<td>"
+								+			rankingData.getGrade()
+								+		"</td>"
+								+		"<td>"
+								+			rankingData.getUserName()
+								+		"</td>"
+								+		"<td>"
+								+			"<img src=\"graph.gif\" alt=\"graph\" width=\"" + (int) (graphParameter * rankingData.getTotal()) + "%\" height=\"100%\">"
+								+		"</td>"
+								+		"<td>"
+								+			rankingData.getTotal()
+								+		"</td>"
+								+		"<td>"
+								+			rankingData.getAverage()
+								+		"</td>"
+								+	"</tr>"
+								;
+		}
+		return resultDataString;
+	}
+%>
 
 <html>
   <head>
@@ -164,7 +114,7 @@
 
   <body>
 	<div align="center">
-		期間：<%="resultPeriod" %>
+		期間：<%=resultPeriod.getDateString() %>
 	</div>
 	<div align="center">
 		<form method="post" action="/result.jsp" style="display: inline;">
@@ -173,12 +123,12 @@
         </form>
         <form method="post" action="/result.jsp" style="display: inline;">
             <input type="hidden" name="id" value="<%=id %>">
-            <input type="hidden" name="period" value="lastWeek">
+            <input type="hidden" name="period" value="<%=Period.LASTWEEK %>">
             <input type="submit" value="前週実績">
         </form>
         <form method="post" action="/result.jsp" style="display: inline;">
             <input type="hidden" name="id" value="<%=id %>">
-            <input type="hidden" name="period" value="lastMonth">
+            <input type="hidden" name="period" value="<%=Period.LASTMONTH %>">
             <input type="submit" value="前月実績">
         </form>
         <form method="post" action="/report.jsp" style="display: inline;">
@@ -194,7 +144,7 @@
   			<td>合計分数</td>
   			<td>1日平均</td>
   		</tr>
-  		<%=eachDataString %>
+  		<%=resultDataString %>
   	</table>
   </body>
 </html>
