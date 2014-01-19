@@ -8,7 +8,7 @@
   <body>
     <table align="center" style="border: solid 1px;" width="320px">
 		<tr>
-			<td colspan="3" align="center"><img src="kiwi.jpg"></td>        
+			<td colspan="3" align="center"><img src="kiwi.png"></td>        
 		</tr>
 	<form action="login" method="post">
 		<tr>
