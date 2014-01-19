@@ -28,19 +28,23 @@ public class LoginServlet extends HttpServlet {
         
         //データストア内のID検索
    		//data取得
-        PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery(StudentData.class);
-		query.setFilter("id == " + id);
-		StudentData data = ((List<StudentData>)pm.detachCopyAll((List<StudentData>)query.execute())).get(0);
-		pm.close();
-    	//パスチェック
-    	if(data.getPass().equals(pass)) {
-    		dispatcher = request.getRequestDispatcher("/report.jsp");
-    		request.setAttribute("id", id);
-       	 	dispatcher.forward(request, response);
+        try {
+	        PersistenceManager pm = PMF.get().getPersistenceManager();
+			Query query = pm.newQuery(StudentData.class);
+			query.setFilter("id == " + id);
+			StudentData data = ((List<StudentData>)pm.detachCopyAll((List<StudentData>)query.execute())).get(0);
+			pm.close();
+	    	//パスチェック
+	    	if(data.getPass().equals(pass)) {
+	    		dispatcher = request.getRequestDispatcher("/report.jsp");
+	    		request.setAttribute("id", id);
+	       	 	dispatcher.forward(request, response);
+	        }
+        } catch(Exception e) {
+        	
         }
    	 	dispatcher = request.getRequestDispatcher("/index.jsp");
-   	 	request.setAttribute("fail", "ログイン失敗");
+   	 	request.setAttribute("fail", "ログインエラー");
    	 	dispatcher.forward(request, response);
 	}
 }
