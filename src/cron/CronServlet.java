@@ -73,10 +73,10 @@ public class CronServlet extends HttpServlet {
             Message msg = new MimeMessage(session);
  
             //発信元情報：メールアドレス、名前
-            msg.setFrom(new InternetAddress("hiroaki.4.suzuki@gmail.com", "iikawa"));
+            msg.setFrom(new InternetAddress("filmlife1226@gmail.com", "iikawa"));
  
             //送信先情報
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress("hiroaki.4.suzuki@gmail.com", ""));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress("hayaku-ondoku-yare@ondoku.com", ""));
             
             //BCC
             boolean BCC = false;

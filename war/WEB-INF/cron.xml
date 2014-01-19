@@ -9,7 +9,7 @@
   <cron>
     <url>/cron/2230</url>
     <description>every day 22:30</description>
-    <schedule>every day 22:30</schedule>
+    <schedule>every day 18:07</schedule>
     <timezone>Asia/Tokyo</timezone>
   </cron>
   <cron>
