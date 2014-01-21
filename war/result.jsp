@@ -1,5 +1,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
+<%@ page import="java.math.*"%>
 <%@ page import="java.io.*"%>
 <%@ page import="database.*"%>
 <%@ page import="javax.jdo.*"%>
@@ -74,14 +75,17 @@
 		
 		//合計分数の最大値を100としたグラフ係数を取得
 		double graphParameter;
-		try{
+		if(Collections.max(totalList) != 0) {
 			graphParameter = 100.0 / Collections.max(totalList);
-		} catch(NullPointerException | ArithmeticException e) {
-			graphParameter = 0.0;
+		} else {
+			graphParameter = 0;
 		}
 		
 		//各生徒ごとに表示内容を格納
 		String resultDataString = "";
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(1);
+	    df.setMinimumFractionDigits(1);
 		while(!rankingMap.isEmpty()) {
 			Long key = rankingMap.lastKey();
 			RankingData rankingData = rankingMap.remove(key);
@@ -93,13 +97,13 @@
 								+			rankingData.getUserName()
 								+		"</td>"
 								+		"<td>"
-								+			"<img src=\"graph.gif\" alt=\"graph\" width=\"" + (int) (graphParameter * rankingData.getTotal()) + "%\" height=\"100%\">"
+								+			"<img src=\"graph.gif\" alt=\"graph\" width=\"" + graphParameter * rankingData.getTotal() + "%\" height=\"100%\">"
 								+		"</td>"
 								+		"<td>"
 								+			rankingData.getTotal()
 								+		"</td>"
 								+		"<td>"
-								+			rankingData.getAverage()
+								+			df.format(rankingData.getAverage())
 								+		"</td>"
 								+	"</tr>"
 								;
@@ -118,6 +122,7 @@
 	<div align="center">
 		期間：<%=resultPeriod.getDateString() %>
 	</div>
+	<p></p>
 	<div align="center">
 		<form method="post" action="/result.jsp" style="display: inline;">
             <input type="hidden" name="id" value="<%=id %>">
@@ -138,6 +143,7 @@
             <input type="submit" value="戻る">
         </form>
 	</div>
+	<p></p>
   	<table border="1" align="center">
   		<tr>
   			<td>学年</td>
