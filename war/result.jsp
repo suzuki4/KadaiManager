@@ -15,17 +15,19 @@
 	} else if(request.getAttribute("id") != null) {
 		id = (Long) request.getAttribute("id");
 	}
+
 	//studentData取得
 	PersistenceManager pm = PMF.get().getPersistenceManager();
 	Query query = pm.newQuery("select from " + StudentData.class.getName());
 	List<StudentData> studentDataList = (List<StudentData>)pm.detachCopyAll((List<StudentData>)query.execute());
 	pm.close();
-	//自分のdata取得
+/*	//自分のdata取得
 	pm = PMF.get().getPersistenceManager();
 	query = pm.newQuery(StudentData.class);
 	query.setFilter("id == " + id);
 	StudentData data = ((List<StudentData>)pm.detachCopyAll((List<StudentData>)query.execute())).get(0);
 	pm.close();
+*/
 	//periodが有る場合（デフォルトは無し→lastDay前日実績）
 	String period = Period.LASTDAY;
 	if(request.getParameter("period") != null) {

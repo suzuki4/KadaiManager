@@ -141,7 +141,7 @@
 
   <body>
 	<div align="center">
-  		<form action="managerlogin"  method="post">
+		<form action="managerlogin"  method="post" style="display: inline;">
 	  		<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
 	  		<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
 	  		<input type="text" name="studentListTimeYear" size="4" maxlength="4" value="<%=studentListTimeYear %>">年
@@ -149,7 +149,12 @@
 	  		<input type="text" name="studentListTimeDay" size="2" maxlength="2" value="<%=studentListTimeDay %>">日
 	  		<input type="submit" value="チェック日付更新">
 	  	</form>  
+		<form action="/result.jsp"  method="post" style="display: inline;">
+	  		<input type="hidden" name="id" value=<%=-1L %>>
+	  		<input type="submit" value="実績一覧">
+	  	</form>  
 	</div>
+	<p></p>
   	<form action="managerlogin"  method="post">
   	<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
 	<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
@@ -157,6 +162,7 @@
 	<div align="center">
 		状態の既チェックを「休止」に設定、未チェックを「休止」から解除：<input type="submit" value="休止状態更新">
 	</div>
+	<p></p>
 	  	<table border="1" align="center">
 	  		<tr>
 	  			<td colspan="2">状態</td>
