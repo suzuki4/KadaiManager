@@ -26,7 +26,7 @@
 	
 	//reportOpenTime取得
 	Date reportOpenTime = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 9);
-	String reportOpenTimeString = new SimpleDateFormat("yy'/'MM'/'dd'\n'HH':'mm").format(reportOpenTime);
+	String reportOpenTimeString = new SimpleDateFormat("yyyy'年'MM'月'dd'日('E')\n'HH':'mm", Locale.JAPAN).format(reportOpenTime);
 
 //以下取消が押された場合
 	if(request.getParameter("index") != null) {
@@ -100,7 +100,7 @@
 										+			"</form>"
 										+		"</td>"
 										+		"<td>"
-										+			new SimpleDateFormat("yy'/'MM'/'dd'\n'HH':'mm").format(takeReportFinishTime)
+										+			new SimpleDateFormat("yyyy'年'MM'月'dd'日('E')\n'HH':'mm", Locale.JAPAN).format(takeReportFinishTime)
 										+		"</td>"
 										+		"<td>"
 										+			data.getReportNameList().get(i)
@@ -123,11 +123,14 @@
 
   <body>
   	<table align="center" style="border: solid 1px;">
-  		<tr>
-  			<td colspan="4" >生徒ID：<%=data.getId() %>　/　学年：<%=data.getGrade() %>　/　生徒名：<%=data.getUserName() %></td>
+  		<tr align="center">
+  			<td colspan="4" >
+  				生徒ID：<%=data.getId() %>　/　学年：<%=data.getGrade() %>　/　生徒名：<%=data.getUserName() %>
+  				<p></p>
+  			</td>
   		</tr>
-  		<tr>
-  			<td colspan="4"  style="border-bottom: solid 1px; margin:10px 0px;">
+  		<tr align="center">
+  			<td colspan="4" style="border-bottom: solid 1px; margin:10px 0px;">
   				<form action="/modify.jsp" method="post" style="display: inline;">
   					<input type="hidden" name="id" value="<%=id %>">
   					<input type="hidden" name="pass" value="<%=data.getPass() %>">
@@ -137,13 +140,16 @@
   					<input type="hidden" name="managerLogin" value="<%=request.getAttribute("managerLogin") %>">
   					<input type="submit" value="登録情報修正">
   				</form>
+  				　　　
   				<form action="/result.jsp" method="post" style="display: inline;">
   					<input type="hidden" name="id" value="<%=id %>">
   					<input type="submit" value="実績一覧">
   				</form>
+  				<p></p>
   			</td>
   		</tr>
-  		<tr>
+  		<tr></tr>
+  		<tr align="center">
   			<td></td>
   			<td>日時</td>
   			<td>取り組んだ課題</td>

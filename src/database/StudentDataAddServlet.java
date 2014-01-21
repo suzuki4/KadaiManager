@@ -77,6 +77,9 @@ public class StudentDataAddServlet extends HttpServlet {
         //“ü—Í‚ª³‚µ‚¢ê‡
         } else {
 	        StudentData data = new StudentData(id, userName, pass, grade, email);
+	        data.setReportNameList(new ArrayList<String>());
+	        data.setReportMinutesList(new ArrayList<Integer>());
+	        data.setReportFinishTimeList(new ArrayList<Date>());
 	        pm = PMF.get().getPersistenceManager();
 	        pm.makePersistent(data);
 	        pm.close();
