@@ -44,7 +44,7 @@ public class ReportForwardServlet extends HttpServlet {
 			//report.jsp‚É”ò‚Î‚·
     		manager.close();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/report.jsp");
-	   	 	request.setAttribute("id", idString);
+	   	 	request.setAttribute("id", Long.parseLong(idString));
 	   	 	request.setAttribute("managerLogin", "true");
 	   	 	dispatcher.forward(request, response);
     	}
