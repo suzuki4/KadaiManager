@@ -75,7 +75,9 @@
 	    	//out.println(e.toString());
 			error +=	"<tr>"
 					+		"<td align=\"center\" colspan=\"4\" style=\"color:#FF0000; font-weight:bold;\" >"
-					+			"入力エラー！"
+					+			"入力エラー！" + "<br>"
+					+			"取り組んだ課題と分数を入力してください。" + "<br>"
+					+			"分数は3桁以内の数字のみ入力してください。"
 					+		"</td>"
 					+	"</tr>"
 					;	
