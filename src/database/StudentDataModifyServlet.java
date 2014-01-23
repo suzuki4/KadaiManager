@@ -110,6 +110,15 @@ public class StudentDataModifyServlet extends HttpServlet {
 		    	pm.deletePersistent(data);
 	    	}
 	        pm.close();
+		    //登録メール送信
+		    String contents = userName + " 様\n"
+					+ "\n"
+					+ "課題管理システムに登録済みのデータを修正しました。\n"
+					+ "身に覚えがない人は以下のアドレスまでご連絡ください。\n"
+					+ "\n"
+					+ "fukasawa@reorjuku.jp"
+					;
+	        new other.registerMail(email, "DataModified", contents).sendMail();
 	        dispatch(request, response, "生徒データの修正成功");
         }
     }

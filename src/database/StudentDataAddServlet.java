@@ -83,6 +83,18 @@ public class StudentDataAddServlet extends HttpServlet {
 	        pm = PMF.get().getPersistenceManager();
 	        pm.makePersistent(data);
 	        pm.close();
+	        //登録メール送信
+	        String contents = userName + " 様\n"
+	        				+ "\n"
+	        				+ "飯川です。課題管理システムへようこそ！\n"
+							+ "メールアドレスを新しく登録しました。\n"
+	        				+ "あなたのログインIDは「" + id + "」です。\n"
+	        				+ "初期パスワードは飯川までお尋ねください。\n"
+							+ "身に覚えがない人は以下のアドレスまでご連絡ください。\n"
+							+ "\n"
+							+ "fukasawa@reorjuku.jp"
+							;
+	        new other.registerMail(email, "Registration", contents).sendMail();
 	        dispatch(request, response, "生徒データの追加成功");
         }
     }
