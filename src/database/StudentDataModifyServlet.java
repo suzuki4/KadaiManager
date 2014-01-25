@@ -115,8 +115,9 @@ public class StudentDataModifyServlet extends HttpServlet {
 					+ "\n"
 					+ "課題管理システムに登録済みのデータを修正しました。\n"
 					+ "身に覚えがない人は以下のアドレスまでご連絡ください。\n"
+					+ "fukasawa@reorjuku.jp\n"
 					+ "\n"
-					+ "fukasawa@reorjuku.jp"
+					+ "http://tokoekaproject.appspot.com/"
 					;
 	        new other.registerMail(email, "DataModified", contents).sendMail();
 	        dispatch(request, response, "生徒データの修正成功");

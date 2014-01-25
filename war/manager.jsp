@@ -9,7 +9,7 @@
     <table align="center" style="border: solid 1px;" width="320px">
 	<form action="managerlogin" method="post">
 		<tr>
-			<td colspan="2">管理者ID：</td><td><input type="text" name="id" size="18" maxlength="12"></td>
+			<td colspan="2">管理者名：</td><td><input type="text" name="userName" size="18" maxlength="12"></td>
 		</tr>
 		<tr>
 			<td colspan="2">パスワード：</td><td><input type="password" name="pass" size="18" maxlength="12"></td>

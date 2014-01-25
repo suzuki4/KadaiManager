@@ -14,8 +14,8 @@ import database.PMF;
 
 public class ManagerLoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		//index.jspから飛んできた
-		String userName = request.getParameter("id");
+		//manager.jspから飛んできた
+		String userName = request.getParameter("userName");
 		String pass = request.getParameter("pass");	
 		
 		//チェックして飛ばす
@@ -29,7 +29,7 @@ public class ManagerLoginServlet extends HttpServlet {
 			pm.close();
 			if(userName.equals(data.getUserName()) && pass.equals(data.getPass())) {
 				dispatcher = request.getRequestDispatcher("studentList.jsp");
-	        	request.setAttribute("id", 1L);
+	        	request.setAttribute("userName", userName);
 	        	request.setAttribute("pass", pass);
 	           	dispatcher.forward(request, response);
 	        }

@@ -142,7 +142,7 @@
   <body>
 	<div align="center">
 		<form action="managerlogin"  method="post" style="display: inline;">
-	  		<input type="hidden" name="id" value=<%=request.getAttribute("id") %>>
+	  		<input type="hidden" name="userName" value=<%=request.getAttribute("userName") %>>
 	  		<input type="hidden" name="pass" value=<%=request.getAttribute("pass") %>>
 	  		<input type="text" name="studentListTimeYear" size="4" maxlength="4" value="<%=studentListTimeYear %>">”N
 	  		<input type="text" name="studentListTimeMonth" size="2" maxlength="2" value="<%=studentListTimeMonth %>">ŒŽ

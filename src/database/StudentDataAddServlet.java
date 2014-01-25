@@ -91,8 +91,9 @@ public class StudentDataAddServlet extends HttpServlet {
 	        				+ "あなたのログインIDは「" + id + "」です。\n"
 	        				+ "初期パスワードは飯川までお尋ねください。\n"
 							+ "身に覚えがない人は以下のアドレスまでご連絡ください。\n"
+							+ "fukasawa@reorjuku.jp\n"
 							+ "\n"
-							+ "fukasawa@reorjuku.jp"
+							+ "http://tokoekaproject.appspot.com/"
 							;
 	        new other.registerMail(email, "Registration", contents).sendMail();
 	        dispatch(request, response, "生徒データの追加成功");
