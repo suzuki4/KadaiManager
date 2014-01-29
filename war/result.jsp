@@ -149,7 +149,7 @@
   			<td>学年</td>
   			<td>生徒名</td>
   			<td>グラフ</td>
-  			<td>合計分数</td>
+  			<td>合計時間数(分)</td>
   			<td>1日平均</td>
   		</tr>
   		<%=resultDataString %>

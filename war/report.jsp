@@ -76,8 +76,8 @@
 			error +=	"<tr>"
 					+		"<td align=\"center\" colspan=\"4\" style=\"color:#FF0000; font-weight:bold;\" >"
 					+			"入力エラー！" + "<br>"
-					+			"取り組んだ課題と分数を入力してください。" + "<br>"
-					+			"分数は3桁以内の数字のみ入力してください。"
+					+			"取り組んだ課題と時間（分）を入力してください。" + "<br>"
+					+			"時間（分）は3桁以内の数字のみ入力してください。"
 					+		"</td>"
 					+	"</tr>"
 					;	
@@ -155,7 +155,7 @@
   			<td></td>
   			<td>日時</td>
   			<td>取り組んだ課題</td>
-  			<td>分数</td>
+  			<td>時間(分)</td>
   		</tr>
   		<form action="/report.jsp"  method="post">
   		<input type="hidden" name="id" value="<%=id %>">
